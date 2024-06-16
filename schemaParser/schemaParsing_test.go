@@ -58,7 +58,7 @@ func getAuthorById(id string) *Author {
 func TestGraphql(t *testing.T) {
 	root, _ := os.Getwd()
 	println(root)
-	sdl, e := fileutil.ReadFile("resource/schema/examplev1.sdl")
+	sdl, e := fileutil.ReadFile("resource/schema/examplev1_2.sdl")
 	require.NoError(t, e)
 	assert.NotEqual(t, sdl, "")
 	QueryType, _ := Parsing(string(sdl),

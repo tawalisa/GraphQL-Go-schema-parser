@@ -58,6 +58,7 @@ func Parsing(sdlContent string, queryFucMap map[string]graphql.FieldResolveFn, s
 	for _, t := range types {
 
 		graphqlObj := createGraphqlObj(t, graphqlObjMap, queryFucMap, schemaFucMap)
+		go createGraphqlObj(t, graphqlObjMap, queryFucMap, schemaFucMap)
 		graphqlObjMap[t.name] = graphqlObj
 
 	}
@@ -135,8 +136,8 @@ func graphqlType(name string, objMap map[string]*graphql.Object) graphql.Output 
 
 func getTypeByName(name string, objMap map[string]*graphql.Object) graphql.Type {
 	name = strings.TrimSpace(name)
-	tname, isArray := extractType(name)
-	t, exist := objMap[tname]
+	tName, isArray := extractType(name)
+	t, exist := objMap[tName]
 	if !exist {
 		panic("not find type " + name)
 	}
